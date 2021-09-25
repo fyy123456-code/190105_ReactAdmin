@@ -22,10 +22,10 @@ export default class Counter extends Component {
 
   incrementAsync = ()=>{
     let {value} = this.refs.selectNumber;
-    setTimeout(()=>{
-      // this.props.store.dispatch(createIncrementAction(value*1))
-      this.props.increment(value*1);
-    },1000)
+    // setTimeout(()=>{
+    //   this.props.increment(value*1);
+    // },1000)
+    this.props.incrementAsync(value*1, 1000);
     
   }
   render() {
