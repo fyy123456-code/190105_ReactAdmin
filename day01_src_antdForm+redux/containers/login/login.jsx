@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
+import {connect} from 'react-redux';
+import {createDemo1Action, createDemo2Action} from '../../redux/action_creators/test_action'
 import './css/login.less';
 import logo from './imgs/logo.png';
 
 const { Item } = Form;
 
 class Login extends Component {
+  componentDidMount(){
+    console.log(this.props);
+  }
+
+  //点击登录的回调
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.form.validateFields((err, value)=>{
       if(!err){
-        alert('向服务器发送请求')
+        // alert('向服务器发送请求')
+        this.props.demo2('888')
       }
     })
   }
@@ -34,7 +42,7 @@ class Login extends Component {
       <div className='login'>
         <header>
           <img src={logo} alt="logo" />
-          <h1>商品管理后台</h1>
+          <h1>商品管理系统{this.props.test}</h1>
         </header>
         <section>
           <h1>用户登录</h1>
@@ -79,4 +87,11 @@ class Login extends Component {
     )
   }
 }
-export default Form.create()(Login)
+
+export default connect(
+  state=>({test:state.test}),
+  {
+    demo1: createDemo1Action,
+    demo2: createDemo2Action
+  }
+)(Form.create()(Login))
