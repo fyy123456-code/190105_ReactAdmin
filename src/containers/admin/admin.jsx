@@ -13,6 +13,7 @@ import Role from '../role/role';
 import Bar from '../bar/bar';
 import Line from '../line/line';
 import Pie from '../pie/pie';
+import LeftNav from './left_nav/left_nav';
 import './css/admin.less'
 const { Footer, Sider, Content } = Layout;
 
@@ -48,7 +49,9 @@ class Admin extends Component {
       console.log(user);
       return (
         <Layout className='admin'>
-          <Sider className='sider'>Sider</Sider>
+          <Sider className='sider'>
+            <LeftNav />
+          </Sider>
           <Layout>
             <Header/>
             <Content className='content'>

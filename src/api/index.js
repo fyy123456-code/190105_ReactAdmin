@@ -9,6 +9,12 @@ export const reqLogin = (username, password) => myAxios.post(`${BASE_URL}/login`
 //获取商品列表请求
 export const reqCategoryList = () => myAxios.get(`${BASE_URL}/manage/category/list`);
 
+//新增商品分类
+export const reqAddCategory = ({categoryName}) => myAxios.post(`${BASE_URL}/manage/category/add`, {categoryName});
+
+//更新一个商品分类
+export const reqUpdateCategory = ({categoryId,categoryName}) => myAxios.post(`${BASE_URL}/manage/category/update`, {categoryId,categoryName});
+
 //请求天气信息
 export const reqWeather = () => {
   return new Promise((resolve, reject) => {

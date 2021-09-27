@@ -4,7 +4,8 @@ import {Icon, Button, Modal} from 'antd';
 import screenfull from 'screenfull';
 import {connect} from 'react-redux';
 import dayjs from 'dayjs';
-// import {reqWeather} from '../../../api/index'
+// import {reqWeather} from '../../../api/index'；
+import menuList from '../../../config/menu_config';
 import {createDeleteUserInfoAction} from '../../../redux/action_creators/login_action'
 import './header.less';
 
@@ -12,7 +13,10 @@ const { confirm } = Modal;
 
 
 @connect(
-  state => ({userInfo: state.userInfo}),
+  state => ({
+    userInfo: state.userInfo,
+    title:state.title
+  }),
   {deleteUser: createDeleteUserInfoAction}
 )
 @withRouter
@@ -21,7 +25,8 @@ class Header extends Component {
   state={
     isFull:false,
     date:dayjs().format('YYYY年 MM月DD日 HH:mm:ss'),
-    weather:{}
+    weather:{},
+    title:''
   }
 
   fullScreen = () => {
@@ -45,6 +50,9 @@ class Header extends Component {
     }, 1000);
 
     // this.getWeather()
+
+    //展示菜单标题
+    this.getTitle()
   }
 
   componentWillUnmount(){
@@ -62,11 +70,27 @@ class Header extends Component {
         this.props.deleteUser();
       },
     });
-  
-    
+  }
+
+  getTitle = () => {
+    console.log('-----gettitle------');
+    let pathKey = this.props.location.pathname.split('/').reverse()[0];
+    let title='';
+    menuList.forEach((item)=>{
+      if(item.children instanceof Array){
+       let tmp = item.children.find((citem)=>{
+          return citem.key === pathKey
+        })
+        if(tmp) title = tmp.title
+      }else{
+        if(item.key === pathKey) title = item.title;
+      }
+    })
+    this.setState({title})
   }
 
   render() {
+    console.log('------render------');
     const {isFull} = this.state;
     const {user} = this.props.userInfo
     return (
@@ -79,7 +103,7 @@ class Header extends Component {
           <Button type='link' onClick={this.logOut}>退出登录</Button>
         </div>
         <div className='header-bottom'>
-          <div className='header-bottom-left'>{this.props.location.pathname}</div>
+          <div className='header-bottom-left'>{this.props.title || this.state.title}</div>
           <div className='header-bottom-right'>
             {this.state.date}
             <img src="http://api.map.baidu.com/images/weather/day/qing.png" alt="天气信息" />
