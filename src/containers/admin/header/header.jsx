@@ -73,8 +73,9 @@ class Header extends Component {
   }
 
   getTitle = () => {
-    console.log('-----gettitle------');
-    let pathKey = this.props.location.pathname.split('/').reverse()[0];
+    const {pathname} = this.props.location;
+    let pathKey = pathname.split('/').reverse()[0];
+    if(pathname.indexOf('product') !== -1) pathKey='product';
     let title='';
     menuList.forEach((item)=>{
       if(item.children instanceof Array){
@@ -90,7 +91,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log('------render------');
     const {isFull} = this.state;
     const {user} = this.props.userInfo
     return (

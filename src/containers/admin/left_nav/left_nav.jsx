@@ -55,7 +55,7 @@ class LeftNav extends Component {
           <h1>商品管理系统</h1>
         </header>
         <Menu
-          selectedKeys={this.props.location.pathname.split('/').reverse()[0]}
+          selectedKeys={ this.props.location.pathname.indexOf('product') !== -1 ? 'product' : this.props.location.pathname.split('/').reverse()[0]}
           defaultOpenKeys={this.props.location.pathname.split('/').splice(2)}
           mode="inline"
           theme="dark"
