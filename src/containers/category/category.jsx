@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { Button, Card, Icon, message, Table, Modal, Form, Input } from 'antd';
+import {connect} from 'react-redux';
+import {createSaveCategoryAction} from '../../redux/action_creators/category_action'
 import { reqCategoryList, reqAddCategory, reqUpdateCategory } from '../../api/index';
 import { PAGE_SIZE } from '../../config/index';
 
 const { Item } = Form;
 
-
+@connect(
+  state => ({}),
+  {
+    saveCategory: createSaveCategoryAction
+  }
+)
 @Form.create()
 class Category extends Component {
 
@@ -24,6 +31,8 @@ class Category extends Component {
     const { status, data, msg } = result;
     if (status === 0) {
       this.setState({ categoryList: data.reverse() })
+      //保存分类信息到redux
+      this.props.saveCategory(data);
     } else {
       message.error(msg, 1);
     }
