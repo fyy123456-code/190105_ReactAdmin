@@ -76,7 +76,6 @@ class Detail extends Component {
   render() {
     return (
       <Card 
-        loading={true} 
         title={
         <div className='left-top'>
           <Button type='link' size='small' onClick={() => { this.props.history.goBack() }}>
@@ -86,7 +85,7 @@ class Detail extends Component {
         </div>
         }
       >
-        <List>
+        <List loading={this.state.isLoading}>
           <Item>
             <span className='prod-name'>商品名称：</span>
             <span>{this.state.name}</span>
@@ -109,7 +108,7 @@ class Detail extends Component {
               {
                 this.state.imgs.map((item, index) => {
                   return (
-                    <img key={index} src={`${BASE_URL}/upload/` + item} alt="商品图片" />
+                    <img style={{width:100}} key={index} src={`${BASE_URL}/upload/` + item} alt="商品图片" />
                   )
                 })
               }
