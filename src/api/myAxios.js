@@ -12,14 +12,12 @@ const instance = axios.create({
 
 //请求拦截器
 instance.interceptors.request.use((config) => {
-  console.log(config);
   NProgress.start();
   //从redux中获取之前所保存的token
   const { token } = store.getState().userInfo;
   //向请求头中添加token,用于校验身份
   if (token) config.headers.Authorization = 'atguigu_' + token;
   const { method, data } = config;
-  console.log(data);
   //若是post请求
   if (method.toLocaleLowerCase() === 'post') {
     //若传递过来的参数是对象

@@ -36,6 +36,15 @@ export const reqAddProduct = (productObj) => myAxios.post(`${BASE_URL}/manage/pr
 // 请求更新商品
 export const reqUpdateProduct = (productObj) => myAxios.post(`${BASE_URL}/manage/product/update`, {...productObj});
 
+// 请求角色列表
+export const reqRoleList = () => myAxios.get(`${BASE_URL}/manage/role/list`);
+
+//请求添加角色
+export const reqAddRole = ({roleName}) => myAxios.post(`${BASE_URL}/manage/role/add`, {roleName});
+
+//请求给角色授权
+export const reqAuthRole = ({roleObj}) => myAxios.post(`${BASE_URL}/manage/role/update`, {...roleObj, auth_time:Date.now()});
+
 
 //请求天气信息
 export const reqWeather = () => {

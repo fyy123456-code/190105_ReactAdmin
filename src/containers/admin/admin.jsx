@@ -28,7 +28,7 @@ const { Footer, Sider, Content } = Layout;
 )
 class Admin extends Component {
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   logOut = () => {
@@ -47,8 +47,6 @@ class Admin extends Component {
       console.log('没有登录');
       return <Redirect to='/login' />
     } else {
-      console.log('登录了');
-      console.log(user);
       return (
         <Layout className='admin'>
           <Sider className='sider'>
