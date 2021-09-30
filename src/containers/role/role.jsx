@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Button, Icon, Table, message, Modal, Form, Input, Tree } from 'antd';
 import {connect} from 'react-redux';
-import { reqRoleList, reqAddRole, reqAuthRole } from '../../api/index'
+import { reqAddRole, reqAuthRole, reqUserList } from '../../api/index'
 import dayjs from 'dayjs';
 import menuList from '../../config/menu_config';
 
@@ -65,12 +65,12 @@ class Role extends Component {
   }
 
   getRoleList = async () => {
-    let result = await reqRoleList();
+    let result = await reqUserList();
     console.log(result);
     const { status, data, msg } = result;
     console.log(data.list);
     if (status === 0) {
-      this.setState({ roleList: data.list })
+      this.setState({ roleList: data.roles })
     }
   }
 
@@ -117,21 +117,21 @@ class Role extends Component {
 
   render() {
 
-    // const dataSource = this.state.roleList;
-    const dataSource = [
-      {
-        "menus": [
-          "role",
-          "home",
-          "category"
-        ],
-        "_id": "5ca9eaa1b49ef916541160d3",
-        "name": "测试",
-        "create_time": 1554639521749,
-        "auth_time": 1558679920395,
-        "auth_name": "test007"
-      },
-    ]
+    const dataSource = this.state.roleList;
+    // const dataSource = [
+    //   {
+    //     "menus": [
+    //       "role",
+    //       "home",
+    //       "category"
+    //     ],
+    //     "_id": "5ca9eaa1b49ef916541160d3",
+    //     "name": "测试",
+    //     "create_time": 1554639521749,
+    //     "auth_time": 1558679920395,
+    //     "auth_name": "test007"
+    //   },
+    // ]
 
     const { getFieldDecorator } = this.props.form;
     const columns = [

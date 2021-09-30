@@ -43,7 +43,15 @@ export const reqRoleList = () => myAxios.get(`${BASE_URL}/manage/role/list`);
 export const reqAddRole = ({roleName}) => myAxios.post(`${BASE_URL}/manage/role/add`, {roleName});
 
 //请求给角色授权
-export const reqAuthRole = ({roleObj}) => myAxios.post(`${BASE_URL}/manage/role/update`, {...roleObj, auth_time:Date.now()});
+export const reqAuthRole = (roleObj) => myAxios.post(`${BASE_URL}/manage/role/update`, {...roleObj, auth_time:Date.now()});
+
+//请求获取所有用户列表同时携带角色列表
+export const reqUserList = () => myAxios.get(`${BASE_URL}/manage/user/list`);
+
+//请求添加用户
+export const reqAddUser = (userObj) => myAxios.post(`${BASE_URL}/manage/user/add`, {...userObj});
+
+
 
 
 //请求天气信息
